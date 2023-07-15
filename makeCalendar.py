@@ -119,7 +119,7 @@ def main():
     st.session_state.month = st.sidebar.slider("月を入力", min_value = 1, max_value = 12, value = nowTime.month) 
     st.session_state.backgroundColor = st.sidebar.color_picker("背景色", "#ffffff")
     st.session_state.fontColor = st.sidebar.color_picker("文字の色", "#000000")
-    selectImage = st.sidebar.selectbox("画像を選択", st.session_state.imageList)
+    selectImage = st.sidebar.selectbox("画像を選択", st.session_state.imageList, index = len(st.session_state.imageList) - 1)
     st.session_state.prompt = st.sidebar.text_input("生成する画像の説明を入力")
     st.session_state.filename = st.sidebar.text_input("生成した画像のファイル名を入力※ファイル名が被ると前の画像は削除されます！")
     
@@ -156,7 +156,7 @@ def main():
                 st.download_button(
                         label = "ダウンロード",
                         data = file,
-                        file_name = CALENDAR_IMAGE_NAME,
+                        file_name = CALENDAR_IMAGE_NAME.replace(".", "(" + str(st.session_state.year) + "-" + str(st.session_state.month) + ")."),
                         mime = "image/png"
                     )
 
